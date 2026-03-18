@@ -7,24 +7,13 @@ services:
       - "3001:3001"
     environment:
       - PORT=3001
-      - MONGODB_URI=mongodb://mongo:27017/portfolio
-      - CONTACT_EMAIL=your@email.com
+      - CONTACT_EMAIL=uddissh.verma@email.com
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
-      - SMTP_USER=your@gmail.com
-      - SMTP_PASS=your_app_password
+      - SMTP_USER=uddissh.verma@gmail.com
+      - SMTP_PASS=nweo bysi yvqn casr  # ← WRAP IN QUOTES (spaces in app password)
       - FRONTEND_URL=http://localhost:5173
-    depends_on:
-      - mongo
-    restart: unless-stopped
-
-  mongo:
-    image: mongo:6
-    ports:
-      - "27017:27017"
     volumes:
-      - mongo_data:/data/db
+      - .:/app  # ← Move INSIDE service (was at root level)
     restart: unless-stopped
-
-volumes:
-  mongo_data:
+    # ← Remove duplicate 'restart' at root level
